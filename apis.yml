@@ -33,6 +33,8 @@ apis:
     properties:
       - type: Documentation
         url: https://devdocs.veriff.com/
+      - type: OpenAPI
+        url: openapi/veriff-openapi.yml
   - aid: veriff:media
     name: Veriff Media API
     description: >-
