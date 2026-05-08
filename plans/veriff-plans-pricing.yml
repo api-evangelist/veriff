@@ -5,38 +5,246 @@ provider: Veriff
 providerId: veriff
 created: '2026-05-08'
 modified: '2026-05-08'
-reconciled: false
+reconciled: true
 tags:
-- KYC
-- Identity Verification
-- Biometrics
-- Fraud Prevention
-- SaaS
-- Plans
-description: Placeholder plans/pricing artifact for Veriff. Replace with real published pricing once
-  the pipeline researches the provider's plans page.
-notes: Initial scaffold — plans/pricing have not yet been reconciled against the provider's documentation.
+  - KYC
+  - Identity Verification
+  - Biometrics
+  - Fraud Prevention
+  - AML
+  - SaaS
+  - Plans
+description: >-
+  Veriff publishes four self-serve tiers (Essential, Plus, Premium, Enterprise) on a
+  per-verification consumption model with a monthly minimum. All tiers include a 15-day
+  free trial with up to 50 live sessions. Add-ons stack on top - extended retention,
+  PEP/sanctions screening, and ongoing monitoring each carry a per-verification or
+  per-monitored-identity surcharge. Enterprise is custom-quoted with volume discounts
+  for 1,000+ verifications/month.
 sources:
-- https://www.veriff.com/
+  - https://www.veriff.com/pricing
+  - https://devdocs.veriff.com/
 plans:
-- id: veriff-default
-  name: To Be Reconciled
-  type: enterprise
-  description: Initial scaffold; replace with provider plan tiers (Free / Pro / Enterprise / pay-as-you-go,
-    etc.) once pricing is reconciled.
-  entries:
-  - label: API Access
-    name: api_access
-    type: flat
-    metric: varies
-    limit: -1
-    timeFrame: usage
-    geo: global
-    unit: 1
-    price: see https://www.veriff.com/
-    userMultiplied: false
-  elements:
-  - name: Pending Reconciliation
+  - id: veriff-trial
+    name: Free Trial
+    type: trial
+    description: >-
+      15-day free trial with up to 50 live sessions, no credit card required. Used to
+      evaluate the SDK and decision quality before committing to a paid tier.
+    entries:
+      - label: Trial Window
+        name: trial_window
+        type: flat
+        metric: days
+        limit: 15
+        timeFrame: trial
+        unit: 1
+        price: '$0'
+        userMultiplied: false
+      - label: Live Sessions
+        name: live_sessions
+        type: quota
+        metric: session
+        limit: 50
+        timeFrame: trial
+        unit: 1
+        price: included
+        userMultiplied: false
+    elements:
+      - name: Up to 50 Live Sessions
+      - name: 15-Day Window
+      - name: No Credit Card Required
+  - id: veriff-essential
+    name: Essential
+    type: subscription
+    description: >-
+      Self-serve entry tier. $0.80 per verification with a $49 monthly minimum.
+      Targeted at organisations with minimal regulatory exposure and low fraud risk.
+      Full automation, 10 extracted data fields, 3-month data retention.
+    entries:
+      - label: Monthly Minimum
+        name: monthly_minimum
+        type: subscription
+        metric: month
+        limit: 1
+        timeFrame: month
+        unit: 1
+        price: '$49'
+        userMultiplied: false
+      - label: Per Verification
+        name: verification
+        type: metered
+        metric: verification
+        limit: -1
+        timeFrame: month
+        unit: 1
+        price: '$0.80'
+        userMultiplied: false
+      - label: Data Retention
+        name: retention
+        type: included
+        metric: months
+        limit: 3
+        timeFrame: lifetime
+        unit: 1
+        price: included
+        userMultiplied: false
+    elements:
+      - name: Full Automation Decisions
+      - name: 10 Extracted Data Fields
+      - name: 3-Month Data Retention
+      - name: Standard Support
+  - id: veriff-plus
+    name: Plus
+    type: subscription
+    description: >-
+      $1.39 per verification with a $99 monthly minimum. Adds hybrid AI + specialist
+      review, enhanced fraud detection, video recording, and 6-month retention. Suited
+      to growing businesses balancing fraud prevention and conversion.
+    entries:
+      - label: Monthly Minimum
+        name: monthly_minimum
+        type: subscription
+        metric: month
+        limit: 1
+        timeFrame: month
+        unit: 1
+        price: '$99'
+        userMultiplied: false
+      - label: Per Verification
+        name: verification
+        type: metered
+        metric: verification
+        limit: -1
+        timeFrame: month
+        unit: 1
+        price: '$1.39'
+        userMultiplied: false
+      - label: Data Retention
+        name: retention
+        type: included
+        metric: months
+        limit: 6
+        timeFrame: lifetime
+        unit: 1
+        price: included
+        userMultiplied: false
+    elements:
+      - name: Hybrid AI + Specialist Review
+      - name: Enhanced Fraud Detection
+      - name: Video Recording
+      - name: 6-Month Data Retention
+  - id: veriff-premium
+    name: Premium
+    type: subscription
+    description: >-
+      $1.89 per verification with a $209 monthly minimum. Designed for regulated
+      industries requiring the highest accuracy. Adds custom branding, bulk data export,
+      and session deletion via API.
+    entries:
+      - label: Monthly Minimum
+        name: monthly_minimum
+        type: subscription
+        metric: month
+        limit: 1
+        timeFrame: month
+        unit: 1
+        price: '$209'
+        userMultiplied: false
+      - label: Per Verification
+        name: verification
+        type: metered
+        metric: verification
+        limit: -1
+        timeFrame: month
+        unit: 1
+        price: '$1.89'
+        userMultiplied: false
+      - label: Data Retention
+        name: retention
+        type: included
+        metric: months
+        limit: 6
+        timeFrame: lifetime
+        unit: 1
+        price: included
+        userMultiplied: false
+    elements:
+      - name: Custom Branding
+      - name: Bulk Data Export
+      - name: Session Deletion via API
+      - name: Hybrid AI + Specialist Review
+      - name: Enhanced Fraud Detection
+  - id: veriff-enterprise
+    name: Enterprise
+    type: enterprise
+    description: >-
+      Custom-quoted enterprise plan for 1,000+ verifications per month with volume
+      discounts, custom retention, dedicated success manager, and SLA terms.
+    entries:
+      - label: Monthly Subscription
+        name: subscription
+        type: subscription
+        metric: month
+        limit: 1
+        timeFrame: month
+        unit: 1
+        price: custom
+        userMultiplied: false
+      - label: Per Verification
+        name: verification
+        type: metered
+        metric: verification
+        limit: -1
+        timeFrame: month
+        unit: 1
+        price: custom (volume-discounted)
+        userMultiplied: false
+    elements:
+      - name: Volume-Discounted Per-Verification Rate
+      - name: Custom Data Retention
+      - name: Dedicated Success Manager
+      - name: SLA Terms
+      - name: Premium Support
+  - id: veriff-addons
+    name: Add-Ons
+    type: add-on
+    description: >-
+      Optional features that layer on any paid tier - extended retention, PEP/sanctions
+      screening, and ongoing monitoring. Each carries a per-verification or
+      per-monitored-identity surcharge.
+    entries:
+      - label: Extended 2-Year Retention
+        name: retention_extended
+        type: metered
+        metric: verification
+        limit: -1
+        timeFrame: usage
+        unit: 1
+        price: '$0.30'
+        userMultiplied: false
+      - label: PEP and Sanctions Screening
+        name: pep_screening
+        type: metered
+        metric: verification
+        limit: -1
+        timeFrame: usage
+        unit: 1
+        price: '$0.64'
+        userMultiplied: false
+      - label: Ongoing Monitoring
+        name: ongoing_monitoring
+        type: metered
+        metric: verification
+        limit: -1
+        timeFrame: usage
+        unit: 1
+        price: '$0.09'
+        userMultiplied: false
+    elements:
+      - name: Extended 2-Year Retention (+$0.30/verification)
+      - name: PEP and Sanctions Screening (+$0.64/verification)
+      - name: Ongoing Monitoring (+$0.09/verification)
 maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+  - FN: Kin Lane
+    email: kin@apievangelist.com

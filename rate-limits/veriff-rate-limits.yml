@@ -7,30 +7,70 @@ created: '2026-05-08'
 modified: '2026-05-08'
 reconciled: false
 tags:
-- KYC
-- Identity Verification
-- Biometrics
-- Fraud Prevention
-- SaaS
-- Rate Limiting
-- Quotas
-- Throttling
-description: Placeholder rate-limit artifact for Veriff. Replace with real limits once the pipeline
-  researches the provider's rate-limit documentation.
-notes: Initial scaffold — limits have not yet been reconciled against the provider's documentation.
+  - KYC
+  - Identity Verification
+  - Biometrics
+  - Fraud Prevention
+  - AML
+  - Rate Limiting
+  - Throttling
+description: >-
+  Veriff applies dynamic rate limiting on the Public API at stationapi.veriff.com.
+  Numeric per-second ceilings are not exhaustively published, but Veriff's docs
+  acknowledge that abusive volume returns 429 Too Many Requests. Authentication is
+  via X-AUTH-CLIENT (API Key) and X-HMAC-SIGNATURE (request body HMAC SHA-256 with
+  the shared secret). Webhook delivery is signed with the same shared secret and
+  retried on transient receiver failure. Reconciliation against a published numeric
+  ceiling pending - confirm with Veriff Solutions Engineering for high-volume integrations.
 sources:
-- https://www.veriff.com/
+  - https://devdocs.veriff.com/
 responseCodes:
   throttled: 429
+  unauthorized: 401
+  signatureInvalid: 401
+  serverError: 5xx
 limits:
-- name: Default
-  scope: account
-  metric: varies
-  limit: see provider documentation
-  notes: Pending reconciliation.
+  - name: Per-API-Key Throttle
+    scope: api_key
+    metric: requests
+    limit: dynamic
+    timeFrame: minute
+    notes: >-
+      Numeric ceiling not published; sustained excessive request volume returns 429
+      Too Many Requests.
+  - name: Session Lifecycle
+    scope: session
+    metric: state_transitions
+    limit: standard
+    notes: >-
+      A session moves from created to submitted to a terminal decision. PATCH to mark
+      submitted must follow media uploads or the decision logic will run with missing
+      data.
+  - name: Webhook Delivery Retry
+    scope: subscription
+    metric: events
+    limit: best-effort with retry
+    notes: >-
+      Veriff retries webhook delivery on receiver failure. Customers should respond
+      with 2xx promptly to avoid retries; persistent failures pause the subscription.
 policies:
-- name: Backoff Strategy
-  description: Clients should implement exponential backoff with jitter and honor any Retry-After header.
+  - name: 429 Throttling
+    description: >-
+      Excessive throughput against the Public API returns 429 Too Many Requests.
+      Clients should back off before retrying.
+  - name: HMAC Signature Verification
+    description: >-
+      Every request must include X-AUTH-CLIENT and X-HMAC-SIGNATURE; webhooks must be
+      verified using the same shared secret before the decision is treated as
+      authoritative.
+  - name: Backoff Strategy
+    description: >-
+      Implement exponential backoff with jitter on 429 / 5xx responses. Cache
+      decisions locally to avoid repeated session lookups.
+  - name: Submit Once Media Is Uploaded
+    description: >-
+      Do not PATCH a session to submitted before all media has been uploaded - the
+      decision logic will run on the captured state.
 maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+  - FN: Kin Lane
+    email: kin@apievangelist.com
