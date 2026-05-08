@@ -1,0 +1,29 @@
+aid: veriff
+url: https://raw.githubusercontent.com/api-evangelist/veriff/refs/heads/main/apis.yml
+name: Veriff
+x-type: company
+description: >-
+  Veriff is an AI-driven identity verification platform offering document, biometric, age, and proof-of-address verification. The Veriff API exposes session creation, decision callbacks, and webhook subscriptions.
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - KYC
+  - Identity Verification
+  - Biometrics
+  - Fraud Prevention
+  - SaaS
+created: '2026-05-08'
+modified: '2026-05-08'
+specificationVersion: '0.19'
+apis: []
+common:
+  - type: Website
+    url: https://www.veriff.com/
+  - type: Plans
+    url: plans/veriff-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/veriff-rate-limits.yml
+  - type: FinOps
+    url: finops/veriff-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
