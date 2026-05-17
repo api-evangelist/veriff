@@ -1,7 +1,7 @@
 aid: veriff
 url: https://raw.githubusercontent.com/api-evangelist/veriff/refs/heads/main/apis.yml
 name: Veriff
-x-type: company
+kind: company
 description: >-
   Veriff is an AI-driven identity verification platform offering document, biometric, age, and proof-of-address verification, plus PEP/sanctions screening, ongoing monitoring, and Identity Fraud Protection. The Veriff Public API exposes session creation, media upload, decisions, attempts, watchlist screening, persons, and webhook delivery, with web and mobile SDKs hosting the capture experience.
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
