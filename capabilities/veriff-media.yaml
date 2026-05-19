@@ -1,0 +1,139 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Veriff Public API — Media
+  description: 'Veriff Public API — Media. 3 operations. Lead operation: Download an individual media file. Self-contained
+    Naftiko capability covering one Veriff business surface.'
+  tags:
+  - Veriff
+  - Media
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    VERIFF_API_KEY: VERIFF_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: veriff-media
+    baseUri: https://stationapi.veriff.com/v1
+    description: Veriff Public API — Media business capability. Self-contained, no shared references.
+    resources:
+    - name: media-mediaId
+      path: /media/{mediaId}
+      operations:
+      - name: get
+        method: GET
+        description: Download an individual media file
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: sessions-sessionId-media
+      path: /sessions/{sessionId}/media
+      operations:
+      - name: post
+        method: POST
+        description: Submit identity documents and biometric media to a session
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: get
+        method: GET
+        description: List media metadata attached to the session
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-AUTH-CLIENT
+      value: '{{env.VERIFF_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: veriff-media-rest
+    port: 8080
+    description: REST adapter for Veriff Public API — Media. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/media/{mediaid}
+      name: media-mediaid
+      description: REST surface for media-mediaId.
+      operations:
+      - method: GET
+        name: get
+        description: Download an individual media file
+        call: veriff-media.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sessions/{sessionid}/media
+      name: sessions-sessionid-media
+      description: REST surface for sessions-sessionId-media.
+      operations:
+      - method: POST
+        name: post
+        description: Submit identity documents and biometric media to a session
+        call: veriff-media.post
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: get
+        description: List media metadata attached to the session
+        call: veriff-media.get
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: veriff-media-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Veriff Public API — Media. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: download-individual-media-file
+      description: Download an individual media file
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: veriff-media.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: submit-identity-documents-and-biometric
+      description: Submit identity documents and biometric media to a session
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: veriff-media.post
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-media-metadata-attached-session
+      description: List media metadata attached to the session
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: veriff-media.get
+      outputParameters:
+      - type: object
+        mapping: $.

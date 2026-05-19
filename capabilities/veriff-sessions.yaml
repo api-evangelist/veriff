@@ -1,0 +1,233 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Veriff Public API — Sessions
+  description: 'Veriff Public API — Sessions. 5 operations. Lead operation: Create a verification session. Self-contained
+    Naftiko capability covering one Veriff business surface.'
+  tags:
+  - Veriff
+  - Sessions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    VERIFF_API_KEY: VERIFF_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: veriff-sessions
+    baseUri: https://stationapi.veriff.com/v1
+    description: Veriff Public API — Sessions business capability. Self-contained, no shared references.
+    resources:
+    - name: sessions
+      path: /sessions
+      operations:
+      - name: post
+        method: POST
+        description: Create a verification session
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: sessions-validate-registry
+      path: /sessions/validate-registry
+      operations:
+      - name: post
+        method: POST
+        description: Create session and validate national ID registry data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: sessions-sessionId
+      path: /sessions/{sessionId}
+      operations:
+      - name: patch
+        method: PATCH
+        description: Update session status (e.g. mark as submitted)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: delete
+        method: DELETE
+        description: Delete a session (testing only)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: sessions-sessionId-collected-data
+      path: /sessions/{sessionId}/collected-data
+      operations:
+      - name: post
+        method: POST
+        description: Upload supplementary end-user data for a session
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-AUTH-CLIENT
+      value: '{{env.VERIFF_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: veriff-sessions-rest
+    port: 8080
+    description: REST adapter for Veriff Public API — Sessions. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/sessions
+      name: sessions
+      description: REST surface for sessions.
+      operations:
+      - method: POST
+        name: post
+        description: Create a verification session
+        call: veriff-sessions.post
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sessions/validate-registry
+      name: sessions-validate-registry
+      description: REST surface for sessions-validate-registry.
+      operations:
+      - method: POST
+        name: post
+        description: Create session and validate national ID registry data
+        call: veriff-sessions.post
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sessions/{sessionid}
+      name: sessions-sessionid
+      description: REST surface for sessions-sessionId.
+      operations:
+      - method: PATCH
+        name: patch
+        description: Update session status (e.g. mark as submitted)
+        call: veriff-sessions.patch
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete
+        description: Delete a session (testing only)
+        call: veriff-sessions.delete
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sessions/{sessionid}/collected-data
+      name: sessions-sessionid-collected-data
+      description: REST surface for sessions-sessionId-collected-data.
+      operations:
+      - method: POST
+        name: post
+        description: Upload supplementary end-user data for a session
+        call: veriff-sessions.post
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: veriff-sessions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Veriff Public API — Sessions. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: create-verification-session
+      description: Create a verification session
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: veriff-sessions.post
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-session-and-validate-national
+      description: Create session and validate national ID registry data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: veriff-sessions.post
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-session-status-e-g-mark
+      description: Update session status (e.g. mark as submitted)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: veriff-sessions.patch
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-session-testing-only
+      description: Delete a session (testing only)
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: veriff-sessions.delete
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: upload-supplementary-end-user-data
+      description: Upload supplementary end-user data for a session
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: veriff-sessions.post
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,72 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Veriff Public API — Watchlist
+  description: 'Veriff Public API — Watchlist. 1 operations. Lead operation: Retrieve PEP and sanctions screening results
+    for a session. Self-contained Naftiko capability covering one Veriff business surface.'
+  tags:
+  - Veriff
+  - Watchlist
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    VERIFF_API_KEY: VERIFF_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: veriff-watchlist
+    baseUri: https://stationapi.veriff.com/v1
+    description: Veriff Public API — Watchlist business capability. Self-contained, no shared references.
+    resources:
+    - name: sessions-sessionId-watchlist-screening
+      path: /sessions/{sessionId}/watchlist-screening
+      operations:
+      - name: get
+        method: GET
+        description: Retrieve PEP and sanctions screening results for a session
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-AUTH-CLIENT
+      value: '{{env.VERIFF_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: veriff-watchlist-rest
+    port: 8080
+    description: REST adapter for Veriff Public API — Watchlist. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/sessions/{sessionid}/watchlist-screening
+      name: sessions-sessionid-watchlist-screening
+      description: REST surface for sessions-sessionId-watchlist-screening.
+      operations:
+      - method: GET
+        name: get
+        description: Retrieve PEP and sanctions screening results for a session
+        call: veriff-watchlist.get
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: veriff-watchlist-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Veriff Public API — Watchlist. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: retrieve-pep-and-sanctions-screening
+      description: Retrieve PEP and sanctions screening results for a session
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: veriff-watchlist.get
+      outputParameters:
+      - type: object
+        mapping: $.

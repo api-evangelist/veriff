@@ -1,0 +1,104 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Veriff Public API — Attempts
+  description: 'Veriff Public API — Attempts. 2 operations. Lead operation: Retrieve media information for a specific attempt.
+    Self-contained Naftiko capability covering one Veriff business surface.'
+  tags:
+  - Veriff
+  - Attempts
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    VERIFF_API_KEY: VERIFF_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: veriff-attempts
+    baseUri: https://stationapi.veriff.com/v1
+    description: Veriff Public API — Attempts business capability. Self-contained, no shared references.
+    resources:
+    - name: attempts-attemptId-media
+      path: /attempts/{attemptId}/media
+      operations:
+      - name: get
+        method: GET
+        description: Retrieve media information for a specific attempt
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: sessions-sessionId-attempts
+      path: /sessions/{sessionId}/attempts
+      operations:
+      - name: get
+        method: GET
+        description: List attempt identifiers for a session
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-AUTH-CLIENT
+      value: '{{env.VERIFF_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: veriff-attempts-rest
+    port: 8080
+    description: REST adapter for Veriff Public API — Attempts. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/attempts/{attemptid}/media
+      name: attempts-attemptid-media
+      description: REST surface for attempts-attemptId-media.
+      operations:
+      - method: GET
+        name: get
+        description: Retrieve media information for a specific attempt
+        call: veriff-attempts.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sessions/{sessionid}/attempts
+      name: sessions-sessionid-attempts
+      description: REST surface for sessions-sessionId-attempts.
+      operations:
+      - method: GET
+        name: get
+        description: List attempt identifiers for a session
+        call: veriff-attempts.get
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: veriff-attempts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Veriff Public API — Attempts. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: retrieve-media-information-specific-attempt
+      description: Retrieve media information for a specific attempt
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: veriff-attempts.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-attempt-identifiers-session
+      description: List attempt identifiers for a session
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: veriff-attempts.get
+      outputParameters:
+      - type: object
+        mapping: $.

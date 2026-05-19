@@ -1,0 +1,72 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Veriff Public API — Persons
+  description: 'Veriff Public API — Persons. 1 operations. Lead operation: Retrieve extracted person data for a session. Self-contained
+    Naftiko capability covering one Veriff business surface.'
+  tags:
+  - Veriff
+  - Persons
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    VERIFF_API_KEY: VERIFF_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: veriff-persons
+    baseUri: https://stationapi.veriff.com/v1
+    description: Veriff Public API — Persons business capability. Self-contained, no shared references.
+    resources:
+    - name: sessions-sessionId-person
+      path: /sessions/{sessionId}/person
+      operations:
+      - name: get
+        method: GET
+        description: Retrieve extracted person data for a session
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-AUTH-CLIENT
+      value: '{{env.VERIFF_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: veriff-persons-rest
+    port: 8080
+    description: REST adapter for Veriff Public API — Persons. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/sessions/{sessionid}/person
+      name: sessions-sessionid-person
+      description: REST surface for sessions-sessionId-person.
+      operations:
+      - method: GET
+        name: get
+        description: Retrieve extracted person data for a session
+        call: veriff-persons.get
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: veriff-persons-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Veriff Public API — Persons. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: retrieve-extracted-person-data-session
+      description: Retrieve extracted person data for a session
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: veriff-persons.get
+      outputParameters:
+      - type: object
+        mapping: $.
