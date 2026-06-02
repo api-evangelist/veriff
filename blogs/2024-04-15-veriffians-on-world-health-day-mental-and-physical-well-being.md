@@ -1,0 +1,8 @@
+---
+title: 'Veriffians on World Health Day: mental and physical well-being'
+url: https://www.veriff.com/blog/veriffians-on-world-health-day-mental-and-physical
+date: '2024-04-15'
+author: agustina.bustinduy@veriff.net
+feed_url: https://www.veriff.com/feed
+---
+There’s a common thread in everyone’s story. Without good physical health, there isn’t good mental health, and vice versa. Read more on how Geo, Ingrid, and Sharelle find their balance in this.  What are your (favorite) healthy habits? Geo Jolly, Lead Product Manager My passion for healthy living stepped up three years ago when I The post Veriffians on World Health Day: mental and physical well-being appeared first on Veriff .
