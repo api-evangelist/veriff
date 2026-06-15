@@ -1,0 +1,306 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Veriff Public API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-AUTH-CLIENT",
+      "value": "{{X-AUTH-CLIENT}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a verification session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://stationapi.veriff.com/v1/sessions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a verification session"
+        },
+        {
+          "info": {
+            "name": "Update session status (e.g. mark as submitted)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://stationapi.veriff.com/v1/sessions/:sessionId",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update session status (e.g. mark as submitted)"
+        },
+        {
+          "info": {
+            "name": "Delete a session (testing only)",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://stationapi.veriff.com/v1/sessions/:sessionId",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a session (testing only)"
+        },
+        {
+          "info": {
+            "name": "Upload supplementary end-user data for a session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://stationapi.veriff.com/v1/sessions/:sessionId/collected-data",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Upload supplementary end-user data for a session"
+        },
+        {
+          "info": {
+            "name": "Create session and validate national ID registry data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://stationapi.veriff.com/v1/sessions/validate-registry",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create session and validate national ID registry data"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Media",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List media metadata attached to the session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stationapi.veriff.com/v1/sessions/:sessionId/media",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List media metadata attached to the session"
+        },
+        {
+          "info": {
+            "name": "Submit identity documents and biometric media to a session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://stationapi.veriff.com/v1/sessions/:sessionId/media",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit identity documents and biometric media to a session"
+        },
+        {
+          "info": {
+            "name": "Download an individual media file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stationapi.veriff.com/v1/media/:mediaId",
+            "params": [
+              {
+                "name": "mediaId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Download an individual media file"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Decisions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve verification decision for a session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stationapi.veriff.com/v1/sessions/:sessionId/decision",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve verification decision for a session"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Persons",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve extracted person data for a session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stationapi.veriff.com/v1/sessions/:sessionId/person",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve extracted person data for a session"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Watchlist",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve PEP and sanctions screening results for a session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stationapi.veriff.com/v1/sessions/:sessionId/watchlist-screening",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve PEP and sanctions screening results for a session"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Attempts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List attempt identifiers for a session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stationapi.veriff.com/v1/sessions/:sessionId/attempts",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List attempt identifiers for a session"
+        },
+        {
+          "info": {
+            "name": "Retrieve media information for a specific attempt",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stationapi.veriff.com/v1/attempts/:attemptId/media",
+            "params": [
+              {
+                "name": "attemptId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve media information for a specific attempt"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

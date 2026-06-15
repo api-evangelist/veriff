@@ -2,10 +2,11 @@ aid: veriff
 url: https://raw.githubusercontent.com/api-evangelist/veriff/refs/heads/main/apis.yml
 name: Veriff
 kind: company
-description: Veriff is an AI-driven identity verification platform offering document, biometric, age, and proof-of-address
-  verification, plus PEP/sanctions screening, ongoing monitoring, and Identity Fraud Protection. The Veriff Public API exposes
-  session creation, media upload, decisions, attempts, watchlist screening, persons, and webhook delivery, with web and mobile
-  SDKs hosting the capture experience.
+description: >-
+  Veriff is an AI-driven identity verification platform offering document, biometric, age, and proof-of-address
+  verification, plus PEP/sanctions screening, ongoing monitoring, and Identity Fraud Protection. The Veriff Public API
+  exposes session creation, media upload, decisions, attempts, watchlist screening, persons, and webhook delivery, with
+  web and mobile SDKs hosting the capture experience.
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
   - KYC
@@ -20,148 +21,144 @@ specificationVersion: '0.19'
 apis:
   - aid: veriff:sessions
     name: Veriff Sessions API
-    description: Creates and manages verification sessions. POST /sessions starts a verification and returns a session URL the
-      end user opens via the SDK or hosted page. GET and PATCH endpoints retrieve the session, mark it as submitted (signal
-      that all media has been uploaded), and cancel sessions. The session is the parent resource for media, decisions, attempts,
-      and persons.
+    description: >-
+      Creates and manages verification sessions. POST /sessions starts a verification and returns a session URL the end
+      user opens via the SDK or hosted page. GET and PATCH endpoints retrieve the session, mark it as submitted (signal
+      that all media has been uploaded), and cancel sessions. The session is the parent resource for media, decisions,
+      attempts, and persons.
     humanURL: https://devdocs.veriff.com/
     baseURL: https://stationapi.veriff.com/v1
     tags:
-    - Sessions
-    - Verification
-    - Onboarding
+      - Sessions
+      - Verification
+      - Onboarding
     properties:
-    - type: Documentation
-      url: https://devdocs.veriff.com/
-    - type: OpenAPI
-      url: openapi/veriff-openapi.yml
-    - type: NaftikoCapability
-      url: capabilities/veriff-attempts.yaml
-    - type: NaftikoCapability
-      url: capabilities/veriff-decisions.yaml
-    - type: NaftikoCapability
-      url: capabilities/veriff-media.yaml
-    - type: NaftikoCapability
-      url: capabilities/veriff-persons.yaml
-    - type: NaftikoCapability
-      url: capabilities/veriff-sessions.yaml
-    - type: NaftikoCapability
-      url: capabilities/veriff-watchlist.yaml
+      - type: Documentation
+        url: https://devdocs.veriff.com/
+      - type: OpenAPI
+        url: openapi/veriff-openapi.yml
   - aid: veriff:media
     name: Veriff Media API
-    description: Uploads document images, selfies, and supporting media to a session and lists the media already attached. Used
-      by custom flows that do not embed the Veriff SDK and capture media themselves.
+    description: >-
+      Uploads document images, selfies, and supporting media to a session and lists the media already attached. Used by
+      custom flows that do not embed the Veriff SDK and capture media themselves.
     humanURL: https://devdocs.veriff.com/
     baseURL: https://stationapi.veriff.com/v1
     tags:
-    - Media
-    - Uploads
-    - Documents
+      - Media
+      - Uploads
+      - Documents
     properties:
-    - type: Documentation
-      url: https://devdocs.veriff.com/
+      - type: Documentation
+        url: https://devdocs.veriff.com/
   - aid: veriff:decisions
     name: Veriff Decisions API
-    description: Retrieves the final verification decision for a submitted session - status (approved, declined, resubmission,
-      expired), reason, code, person data extracted from the document, and risk metadata. Available as a pull endpoint and via
-      webhook.
+    description: >-
+      Retrieves the final verification decision for a submitted session - status (approved, declined, resubmission,
+      expired), reason, code, person data extracted from the document, and risk metadata. Available as a pull endpoint
+      and via webhook.
     humanURL: https://devdocs.veriff.com/
     baseURL: https://stationapi.veriff.com/v1
     tags:
-    - Decisions
-    - Verification Results
+      - Decisions
+      - Verification Results
     properties:
-    - type: Documentation
-      url: https://devdocs.veriff.com/
+      - type: Documentation
+        url: https://devdocs.veriff.com/
   - aid: veriff:attempts
     name: Veriff Attempts API
-    description: Lists individual attempts within a session - useful when a session results in resubmission. Each attempt carries
+    description: >-
+      Lists individual attempts within a session - useful when a session results in resubmission. Each attempt carries
       its own captured media and reason metadata.
     humanURL: https://devdocs.veriff.com/
     baseURL: https://stationapi.veriff.com/v1
     tags:
-    - Attempts
-    - Resubmission
+      - Attempts
+      - Resubmission
     properties:
-    - type: Documentation
-      url: https://devdocs.veriff.com/
+      - type: Documentation
+        url: https://devdocs.veriff.com/
   - aid: veriff:persons
     name: Veriff Persons API
-    description: Retrieves the person record extracted from a session decision - structured fields (first name, last name, date
-      of birth, document number, nationality) and document metadata used for downstream KYC and CRM enrolment.
+    description: >-
+      Retrieves the person record extracted from a session decision - structured fields (first name, last name, date of
+      birth, document number, nationality) and document metadata used for downstream KYC and CRM enrolment.
     humanURL: https://devdocs.veriff.com/
     baseURL: https://stationapi.veriff.com/v1
     tags:
-    - Persons
-    - Identity Data
+      - Persons
+      - Identity Data
     properties:
-    - type: Documentation
-      url: https://devdocs.veriff.com/
+      - type: Documentation
+        url: https://devdocs.veriff.com/
   - aid: veriff:watchlist-screening
     name: Veriff Watchlist Screening API
-    description: Runs and retrieves PEP, sanctions, adverse-media, and ongoing-monitoring screening tied to a verification session
+    description: >-
+      Runs and retrieves PEP, sanctions, adverse-media, and ongoing-monitoring screening tied to a verification session
       or to a stand-alone identity payload.
     humanURL: https://www.veriff.com/products/aml
     baseURL: https://stationapi.veriff.com/v1
     tags:
-    - AML
-    - Sanctions
-    - PEP
-    - Watchlist
+      - AML
+      - Sanctions
+      - PEP
+      - Watchlist
     properties:
-    - type: Documentation
-      url: https://www.veriff.com/products/aml
+      - type: Documentation
+        url: https://www.veriff.com/products/aml
   - aid: veriff:webhooks
     name: Veriff Webhook Delivery
-    description: Server-to-server delivery of decision and event notifications. Veriff signs each payload via the customer's
-      shared secret using the X-HMAC-SIGNATURE header so receivers can verify authenticity. Customers configure the URL in the
+    description: >-
+      Server-to-server delivery of decision and event notifications. Veriff signs each payload via the customer's shared
+      secret using the X-HMAC-SIGNATURE header so receivers can verify authenticity. Customers configure the URL in the
       Veriff Customer Portal.
     humanURL: https://devdocs.veriff.com/
     baseURL: customer-configured
     tags:
-    - Webhooks
-    - Events
-    - HMAC
+      - Webhooks
+      - Events
+      - HMAC
     properties:
-    - type: Documentation
-      url: https://devdocs.veriff.com/
+      - type: Documentation
+        url: https://devdocs.veriff.com/
   - aid: veriff:web-sdk
     name: Veriff Web (InContext / Hosted) SDK
-    description: Browser-based capture experience that embeds verification inside the customer's site (InContext) or runs as
-      a Veriff-hosted page. Requires a session token issued by the Sessions API.
+    description: >-
+      Browser-based capture experience that embeds verification inside the customer's site (InContext) or runs as a
+      Veriff-hosted page. Requires a session token issued by the Sessions API.
     humanURL: https://github.com/Veriff
     baseURL: https://github.com/Veriff
     tags:
-    - Web SDK
-    - JavaScript
-    - Capture
+      - Web SDK
+      - JavaScript
+      - Capture
     properties:
-    - type: Documentation
-      url: https://github.com/Veriff
+      - type: Documentation
+        url: https://github.com/Veriff
   - aid: veriff:ios-sdk
     name: Veriff iOS SDK
     description: Native iOS SDK that drives capture and streams media to Veriff. Initialised with a session URL.
     humanURL: https://github.com/Veriff/veriff-ios
     baseURL: https://github.com/Veriff/veriff-ios
     tags:
-    - iOS SDK
-    - Mobile
-    - Capture
+      - iOS SDK
+      - Mobile
+      - Capture
     properties:
-    - type: Documentation
-      url: https://github.com/Veriff/veriff-ios
+      - type: Documentation
+        url: https://github.com/Veriff/veriff-ios
   - aid: veriff:android-sdk
     name: Veriff Android SDK
     description: Native Android SDK for capture and media upload. Initialised with a session URL from the Sessions API.
     humanURL: https://github.com/Veriff/veriff-android
     baseURL: https://github.com/Veriff/veriff-android
     tags:
-    - Android SDK
-    - Mobile
-    - Capture
+      - Android SDK
+      - Mobile
+      - Capture
     properties:
-    - type: Documentation
-      url: https://github.com/Veriff/veriff-android
+      - type: Documentation
+        url: https://github.com/Veriff/veriff-android
 common:
   - type: LinkedIn
     url: https://www.linkedin.com/company/veriff
