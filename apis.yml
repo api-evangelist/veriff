@@ -7,7 +7,7 @@ description: >-
   verification, plus PEP/sanctions screening, ongoing monitoring, and Identity Fraud Protection. The Veriff Public API
   exposes session creation, media upload, decisions, attempts, watchlist screening, persons, and webhook delivery, with
   web and mobile SDKs hosting the capture experience.
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - KYC
   - Identity Verification
