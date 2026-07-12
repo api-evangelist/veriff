@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/veriff-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: VeriffAuth
+  type: apiKey
+  in: header
+  parameter: X-AUTH-CLIENT
+  description: Veriff requires X-AUTH-CLIENT (API key) and X-HMAC-SIGNATURE (HMAC-SHA256 of
+    the request body using the shared secret) headers on every request.
+  sources:
+  - openapi/veriff-openapi.yml

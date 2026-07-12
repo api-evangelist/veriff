@@ -160,6 +160,12 @@ apis:
       - type: Documentation
         url: https://github.com/Veriff/veriff-android
 common:
+  - type: VulnerabilityDisclosure
+    url: security/veriff-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/veriff-domain-security.yml
+  - type: Authentication
+    url: authentication/veriff-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/veriff
   - type: Website
@@ -174,6 +180,8 @@ common:
     url: rate-limits/veriff-rate-limits.yml
   - type: FinOps
     url: finops/veriff-finops.yml
+  - type: Blog
+    url: https://www.veriff.com/feed
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
