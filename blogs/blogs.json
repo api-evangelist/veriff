@@ -1,0 +1,13 @@
+{
+  "repo": "veriff",
+  "feeds": [
+    {
+      "source": "https://www.veriff.com/feed",
+      "feed_url": "https://www.veriff.com/feed",
+      "title": "Veriff",
+      "saved": 0
+    }
+  ],
+  "fetched": "2026-07-11T11:43:46Z",
+  "post_count": 16
+}
