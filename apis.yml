@@ -160,6 +160,8 @@ apis:
       - type: Documentation
         url: https://github.com/Veriff/veriff-android
 common:
+  - type: AgenticAccess
+    url: agentic-access/veriff-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/veriff-vulnerability-disclosure.yml
   - type: DomainSecurity
