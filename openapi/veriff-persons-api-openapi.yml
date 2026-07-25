@@ -1,0 +1,43 @@
+openapi: 3.1.0
+info:
+  title: Veriff Public Attempts Persons API
+  version: '1.0'
+  description: Minimal OpenAPI for the Veriff identity verification public API. Covers sessions, media uploads, decisions, attempts, persons, and watchlist screening.
+  x-generated-from: https://devdocs.veriff.com/apidocs
+  x-generated-by: claude-crawl-2026-05-08
+servers:
+- url: https://stationapi.veriff.com/v1
+  description: Veriff Station API v1
+security:
+- VeriffAuth: []
+tags:
+- name: Persons
+paths:
+  /sessions/{sessionId}/person:
+    parameters:
+    - $ref: '#/components/parameters/SessionId'
+    get:
+      tags:
+      - Persons
+      summary: Retrieve extracted person data for a session
+      responses:
+        '200':
+          description: Person record
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  parameters:
+    SessionId:
+      name: sessionId
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    VeriffAuth:
+      type: apiKey
+      in: header
+      name: X-AUTH-CLIENT
+      description: Veriff requires X-AUTH-CLIENT (API key) and X-HMAC-SIGNATURE (HMAC-SHA256 of the request body using the shared secret) headers on every request.

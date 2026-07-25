@@ -1,0 +1,112 @@
+openapi: 3.1.0
+info:
+  title: Veriff Public Attempts Sessions API
+  version: '1.0'
+  description: Minimal OpenAPI for the Veriff identity verification public API. Covers sessions, media uploads, decisions, attempts, persons, and watchlist screening.
+  x-generated-from: https://devdocs.veriff.com/apidocs
+  x-generated-by: claude-crawl-2026-05-08
+servers:
+- url: https://stationapi.veriff.com/v1
+  description: Veriff Station API v1
+security:
+- VeriffAuth: []
+tags:
+- name: Sessions
+paths:
+  /sessions:
+    post:
+      tags:
+      - Sessions
+      summary: Create a verification session
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '201':
+          description: Session created
+          content:
+            application/json:
+              schema:
+                type: object
+  /sessions/{sessionId}:
+    parameters:
+    - $ref: '#/components/parameters/SessionId'
+    patch:
+      tags:
+      - Sessions
+      summary: Update session status (e.g. mark as submitted)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Session updated
+          content:
+            application/json:
+              schema:
+                type: object
+    delete:
+      tags:
+      - Sessions
+      summary: Delete a session (testing only)
+      responses:
+        '204':
+          description: Session deleted
+  /sessions/{sessionId}/collected-data:
+    parameters:
+    - $ref: '#/components/parameters/SessionId'
+    post:
+      tags:
+      - Sessions
+      summary: Upload supplementary end-user data for a session
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Data accepted
+          content:
+            application/json:
+              schema:
+                type: object
+  /sessions/validate-registry:
+    post:
+      tags:
+      - Sessions
+      summary: Create session and validate national ID registry data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Registry validation result
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  parameters:
+    SessionId:
+      name: sessionId
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    VeriffAuth:
+      type: apiKey
+      in: header
+      name: X-AUTH-CLIENT
+      description: Veriff requires X-AUTH-CLIENT (API key) and X-HMAC-SIGNATURE (HMAC-SHA256 of the request body using the shared secret) headers on every request.

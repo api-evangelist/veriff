@@ -1,0 +1,79 @@
+openapi: 3.1.0
+info:
+  title: Veriff Public Attempts Media API
+  version: '1.0'
+  description: Minimal OpenAPI for the Veriff identity verification public API. Covers sessions, media uploads, decisions, attempts, persons, and watchlist screening.
+  x-generated-from: https://devdocs.veriff.com/apidocs
+  x-generated-by: claude-crawl-2026-05-08
+servers:
+- url: https://stationapi.veriff.com/v1
+  description: Veriff Station API v1
+security:
+- VeriffAuth: []
+tags:
+- name: Media
+paths:
+  /sessions/{sessionId}/media:
+    parameters:
+    - $ref: '#/components/parameters/SessionId'
+    post:
+      tags:
+      - Media
+      summary: Submit identity documents and biometric media to a session
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Media accepted
+          content:
+            application/json:
+              schema:
+                type: object
+    get:
+      tags:
+      - Media
+      summary: List media metadata attached to the session
+      responses:
+        '200':
+          description: Media list
+          content:
+            application/json:
+              schema:
+                type: object
+  /media/{mediaId}:
+    parameters:
+    - name: mediaId
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Media
+      summary: Download an individual media file
+      responses:
+        '200':
+          description: Media payload
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+components:
+  parameters:
+    SessionId:
+      name: sessionId
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    VeriffAuth:
+      type: apiKey
+      in: header
+      name: X-AUTH-CLIENT
+      description: Veriff requires X-AUTH-CLIENT (API key) and X-HMAC-SIGNATURE (HMAC-SHA256 of the request body using the shared secret) headers on every request.
