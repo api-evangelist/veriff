@@ -1,0 +1,24 @@
+{
+  "provider": "veriff",
+  "sources": [
+    "veriff-attempts-api-openapi.yml",
+    "veriff-decisions-api-openapi.yml",
+    "veriff-media-api-openapi.yml",
+    "veriff-persons-api-openapi.yml",
+    "veriff-sessions-api-openapi.yml",
+    "veriff-watchlist-api-openapi.yml"
+  ],
+  "outputs": [
+    "veriff-attempts-api-openapi.yml",
+    "veriff-decisions-api-openapi.yml",
+    "veriff-media-api-openapi.yml",
+    "veriff-persons-api-openapi.yml",
+    "veriff-sessions-api-openapi.yml",
+    "veriff-watchlist-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
