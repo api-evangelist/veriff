@@ -1,0 +1,44 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Veriff Public Attempts Persons API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-AUTH-CLIENT",
+      "value": "{{X-AUTH-CLIENT}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Persons",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve extracted person data for a session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stationapi.veriff.com/v1/sessions/:sessionId/person",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve extracted person data for a session"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

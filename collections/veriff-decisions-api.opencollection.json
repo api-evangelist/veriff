@@ -1,0 +1,44 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Veriff Public Attempts Decisions API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-AUTH-CLIENT",
+      "value": "{{X-AUTH-CLIENT}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Decisions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve verification decision for a session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stationapi.veriff.com/v1/sessions/:sessionId/decision",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve verification decision for a session"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

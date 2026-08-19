@@ -1,0 +1,118 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Veriff Public Attempts Sessions API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-AUTH-CLIENT",
+      "value": "{{X-AUTH-CLIENT}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a verification session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://stationapi.veriff.com/v1/sessions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a verification session"
+        },
+        {
+          "info": {
+            "name": "Update session status (e.g. mark as submitted)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://stationapi.veriff.com/v1/sessions/:sessionId",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update session status (e.g. mark as submitted)"
+        },
+        {
+          "info": {
+            "name": "Delete a session (testing only)",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://stationapi.veriff.com/v1/sessions/:sessionId",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a session (testing only)"
+        },
+        {
+          "info": {
+            "name": "Upload supplementary end-user data for a session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://stationapi.veriff.com/v1/sessions/:sessionId/collected-data",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Upload supplementary end-user data for a session"
+        },
+        {
+          "info": {
+            "name": "Create session and validate national ID registry data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://stationapi.veriff.com/v1/sessions/validate-registry",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create session and validate national ID registry data"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

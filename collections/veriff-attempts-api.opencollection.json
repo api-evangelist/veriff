@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Veriff Public Attempts API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-AUTH-CLIENT",
+      "value": "{{X-AUTH-CLIENT}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Attempts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List attempt identifiers for a session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stationapi.veriff.com/v1/sessions/:sessionId/attempts",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List attempt identifiers for a session"
+        },
+        {
+          "info": {
+            "name": "Retrieve media information for a specific attempt",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://stationapi.veriff.com/v1/attempts/:attemptId/media",
+            "params": [
+              {
+                "name": "attemptId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve media information for a specific attempt"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
