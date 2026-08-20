@@ -27,6 +27,13 @@ tags:
   - Biometrics
   - Fraud Prevention
   - AML
+  - Software-as-a-Service
+tags_raw:
+  - KYC
+  - Identity Verification
+  - Biometrics
+  - Fraud Prevention
+  - AML
   - SaaS
 created: '2026-05-08'
 modified: '2026-05-19'
@@ -111,6 +118,10 @@ apis:
   humanURL: https://devdocs.veriff.com/
   baseURL: customer-configured
   tags:
+  - Webhook
+  - Event
+  - HMAC
+  tags_raw:
   - Webhooks
   - Events
   - HMAC
