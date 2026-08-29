@@ -7,6 +7,18 @@ description: >-
   verification, plus PEP/sanctions screening, ongoing monitoring, and Identity Fraud Protection. The Veriff Public API
   exposes session creation, media upload, decisions, attempts, watchlist screening, persons, and webhook delivery, with
   web and mobile SDKs hosting the capture experience.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
