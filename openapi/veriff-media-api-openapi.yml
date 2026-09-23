@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Veriff Public Attempts Media API
+  title: Veriff Public Media API
   version: '1.0'
   description: Minimal OpenAPI for the Veriff identity verification public API. Covers sessions, media uploads, decisions, attempts, persons, and watchlist screening.
   x-generated-from: https://devdocs.veriff.com/apidocs
@@ -33,6 +33,8 @@ paths:
             application/json:
               schema:
                 type: object
+      operationId: postSessionsBySessionIdMedia
+      x-operation-id-source: derived
     get:
       tags:
       - Media
@@ -44,6 +46,8 @@ paths:
             application/json:
               schema:
                 type: object
+      operationId: getSessionsBySessionIdMedia
+      x-operation-id-source: derived
   /media/{mediaId}:
     parameters:
     - name: mediaId
@@ -63,6 +67,8 @@ paths:
               schema:
                 type: string
                 format: binary
+      operationId: getMediaByMediaId
+      x-operation-id-source: derived
 components:
   parameters:
     SessionId:

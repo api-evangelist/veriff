@@ -1,12 +1,7 @@
 {
   "provider": "veriff",
   "sources": [
-    "veriff-attempts-api-openapi.yml",
-    "veriff-decisions-api-openapi.yml",
-    "veriff-media-api-openapi.yml",
-    "veriff-persons-api-openapi.yml",
-    "veriff-sessions-api-openapi.yml",
-    "veriff-watchlist-api-openapi.yml"
+    "_ae-authored/veriff-openapi.yml"
   ],
   "outputs": [
     "veriff-attempts-api-openapi.yml",
@@ -19,6 +14,17 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "veriff-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "veriff-attempts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "veriff-decisions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "veriff-media-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "veriff-persons-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "veriff-sessions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "veriff-watchlist-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

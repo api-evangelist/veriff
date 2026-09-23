@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Veriff Public Attempts API
   version: '1.0'
@@ -27,6 +27,8 @@ paths:
             application/json:
               schema:
                 type: object
+      operationId: getSessionsBySessionIdAttempts
+      x-operation-id-source: derived
   /attempts/{attemptId}/media:
     parameters:
     - name: attemptId
@@ -45,6 +47,8 @@ paths:
             application/json:
               schema:
                 type: object
+      operationId: getAttemptsByAttemptIdMedia
+      x-operation-id-source: derived
 components:
   parameters:
     SessionId:
