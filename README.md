@@ -1,4 +1,4 @@
-# Veriff (veriff)
+# Veriff
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,224 +66,135 @@
 
 Veriff is an AI-driven identity verification platform offering document, biometric, age, and proof-of-address verification, plus PEP/sanctions screening, ongoing monitoring, and Identity Fraud Protection. The Veriff Public API exposes session creation, media upload, decisions, attempts, watchlist screening, persons, and webhook delivery, with web and mobile SDKs hosting the capture experience.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/veriff/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/veriff/refs/heads/main/apis.yml)
+**Areas:** KYC · Identity Verification · Biometrics · Fraud Prevention · AML · Software-as-a-Service
 
-## Tags
+## Veriff on APIs.io
 
-- KYC
-- Identity Verification
-- Biometrics
-- Fraud Prevention
-- AML
-- SaaS
+Everything profiled for Veriff is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/veriff/](https://apis.io/providers/veriff/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (15)
 
-- **Created:** 2026-05-08
-- **Modified:** 2026-05-19
+- [Veriff Media API](https://apis.io/apis/veriff/media/) — Uploads document images, selfies, and supporting media to a session and lists the media already attached. Used by custom flows that do not embed the Veriff…
+- [Veriff Decisions API](https://apis.io/apis/veriff/decisions/) — Retrieves the final verification decision for a submitted session - status (approved, declined, resubmission, expired), reason, code, person data extracted…
+- [Veriff Attempts API](https://apis.io/apis/veriff/attempts/) — Lists individual attempts within a session - useful when a session results in resubmission. Each attempt carries its own captured media and reason metadata.
+- [Veriff Persons API](https://apis.io/apis/veriff/persons/) — Retrieves the person record extracted from a session decision - structured fields (first name, last name, date of birth, document number, nationality) and…
+- [Veriff Watchlist Screening API](https://apis.io/apis/veriff/watchlist-screening/) — Runs and retrieves PEP, sanctions, adverse-media, and ongoing-monitoring screening tied to a verification session or to a stand-alone identity payload.
+- [Veriff Webhook Delivery](https://apis.io/apis/veriff/webhooks/) — Server-to-server delivery of decision and event notifications. Veriff signs each payload via the customer's shared secret using the X-HMAC-SIGNATURE header…
+- [Veriff Web (InContext / Hosted) SDK](https://apis.io/apis/veriff/web-sdk/) — Browser-based capture experience that embeds verification inside the customer's site (InContext) or runs as a Veriff-hosted page. Requires a session token…
+- [Veriff iOS SDK](https://apis.io/apis/veriff/ios-sdk/) — Native iOS SDK that drives capture and streams media to Veriff. Initialised with a session URL.
+- [Veriff Android SDK](https://apis.io/apis/veriff/android-sdk/) — Native Android SDK for capture and media upload. Initialised with a session URL from the Sessions API.
+- [Veriff Attempts API](https://apis.io/apis/veriff/veriff-attempts-api/) — The Attempts API from Veriff — 2 operation(s) for attempts.
+- [Veriff Decisions API](https://apis.io/apis/veriff/veriff-decisions-api/) — The Decisions API from Veriff — 1 operation(s) for decisions.
+- [Veriff Media API](https://apis.io/apis/veriff/veriff-media-api/) — The Media API from Veriff — 2 operation(s) for media.
+- [Veriff Persons API](https://apis.io/apis/veriff/veriff-persons-api/) — The Persons API from Veriff — 1 operation(s) for persons.
+- [Veriff Sessions API](https://apis.io/apis/veriff/veriff-sessions-api/) — The Sessions API from Veriff — 4 operation(s) for sessions.
+- [Veriff Watchlist API](https://apis.io/apis/veriff/veriff-watchlist-api/) — The Watchlist API from Veriff — 1 operation(s) for watchlist.
 
-## APIs
+### Published properties
 
-### Veriff Sessions API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Creates and manages verification sessions. POST /sessions starts a verification and returns a session URL the end user opens via the SDK or hosted page. GET and PATCH endpoints retrieve the session, mark it as submitted (signal that all media has been uploaded), and cancel sessions. The session is the parent resource for media, decisions, attempts, and persons.
+#### Agentic access (1)
 
-- **Human URL:** [https://devdocs.veriff.com/](https://devdocs.veriff.com/)
-- **Base URL:** `https://stationapi.veriff.com/v1`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Veriff Agentic Access](https://apis.io/agentic-access/veriff/veriff-agentic-access/)
 
-- Sessions
-- Verification
-- Onboarding
+#### Collections (7)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [Documentation](https://devdocs.veriff.com/)
-- [OpenAPI](openapi/veriff-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/veriff.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/veriff.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Veriff Public API](https://apis.io/collections/veriff/open-veriff/)
+- [Veriff Public Attempts API](https://apis.io/collections/veriff/open-veriff-attempts-api/)
+- [Veriff Public Attempts Decisions API](https://apis.io/collections/veriff/open-veriff-decisions-api/)
+- [Veriff Public Attempts Media API](https://apis.io/collections/veriff/open-veriff-media-api/)
+- [Veriff Public Attempts Persons API](https://apis.io/collections/veriff/open-veriff-persons-api/)
+- [Veriff Public Attempts Sessions API](https://apis.io/collections/veriff/open-veriff-sessions-api/)
+- [Veriff Public Attempts Watchlist API](https://apis.io/collections/veriff/open-veriff-watchlist-api/)
 
-### Veriff Media API
+#### Security (3)
 
-Uploads document images, selfies, and supporting media to a session and lists the media already attached. Used by custom flows that do not embed the Veriff SDK and capture media themselves.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://devdocs.veriff.com/](https://devdocs.veriff.com/)
-- **Base URL:** `https://stationapi.veriff.com/v1`
+- [Veriff Authentication](https://apis.io/security/veriff/veriff-authentication/)
+- [Veriff Domain Security](https://apis.io/security/veriff/veriff-domain-security/)
+- [Veriff Vulnerability Disclosure](https://apis.io/security/veriff/veriff-vulnerability-disclosure/)
 
-#### Tags
+#### Plans and pricing (1)
 
-- Media
-- Uploads
-- Documents
+Published plans, tiers and prices.
 
-#### Properties
+- [Veriff Plans Pricing](https://apis.io/plans/veriff/veriff-plans-pricing/)
 
-- [Documentation](https://devdocs.veriff.com/)
-- [Postman Collection](collections/veriff.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/veriff.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Rate limits (1)
 
-### Veriff Decisions API
+Published request limits.
 
-Retrieves the final verification decision for a submitted session - status (approved, declined, resubmission, expired), reason, code, person data extracted from the document, and risk metadata. Available as a pull endpoint and via webhook.
+- [Veriff Rate Limits](https://apis.io/rate-limits/veriff/veriff-rate-limits/)
 
-- **Human URL:** [https://devdocs.veriff.com/](https://devdocs.veriff.com/)
-- **Base URL:** `https://stationapi.veriff.com/v1`
+#### FinOps (1)
 
-#### Tags
+What the API costs to run, by operation.
 
-- Decisions
-- Verification Results
+- [Veriff Finops](https://apis.io/finops/veriff/veriff-finops/)
 
-#### Properties
+## Where to find this API
 
-- [Documentation](https://devdocs.veriff.com/)
-- [Postman Collection](collections/veriff.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/veriff.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-### Veriff Attempts API
-
-Lists individual attempts within a session - useful when a session results in resubmission. Each attempt carries its own captured media and reason metadata.
-
-- **Human URL:** [https://devdocs.veriff.com/](https://devdocs.veriff.com/)
-- **Base URL:** `https://stationapi.veriff.com/v1`
-
-#### Tags
-
-- Attempts
-- Resubmission
-
-#### Properties
-
-- [Documentation](https://devdocs.veriff.com/)
-- [Postman Collection](collections/veriff.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/veriff.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Veriff Persons API
-
-Retrieves the person record extracted from a session decision - structured fields (first name, last name, date of birth, document number, nationality) and document metadata used for downstream KYC and CRM enrolment.
-
-- **Human URL:** [https://devdocs.veriff.com/](https://devdocs.veriff.com/)
-- **Base URL:** `https://stationapi.veriff.com/v1`
-
-#### Tags
-
-- Persons
-- Identity Data
-
-#### Properties
-
-- [Documentation](https://devdocs.veriff.com/)
-- [Postman Collection](collections/veriff.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/veriff.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Veriff Watchlist Screening API
-
-Runs and retrieves PEP, sanctions, adverse-media, and ongoing-monitoring screening tied to a verification session or to a stand-alone identity payload.
-
-- **Human URL:** [https://www.veriff.com/products/aml](https://www.veriff.com/products/aml)
-- **Base URL:** `https://stationapi.veriff.com/v1`
-
-#### Tags
-
-- AML
-- Sanctions
-- PEP
-- Watchlist
-
-#### Properties
-
-- [Documentation](https://www.veriff.com/products/aml)
-- [Postman Collection](collections/veriff.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/veriff.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Veriff Webhook Delivery
-
-Server-to-server delivery of decision and event notifications. Veriff signs each payload via the customer's shared secret using the X-HMAC-SIGNATURE header so receivers can verify authenticity. Customers configure the URL in the Veriff Customer Portal.
-
-- **Human URL:** [https://devdocs.veriff.com/](https://devdocs.veriff.com/)
-- **Base URL:** `customer-configured`
-
-#### Tags
-
-- Webhooks
-- Events
-- HMAC
-
-#### Properties
-
-- [Documentation](https://devdocs.veriff.com/)
-- [Postman Collection](collections/veriff.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/veriff.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Veriff Web (InContext / Hosted) SDK
-
-Browser-based capture experience that embeds verification inside the customer's site (InContext) or runs as a Veriff-hosted page. Requires a session token issued by the Sessions API.
-
-- **Human URL:** [https://github.com/Veriff](https://github.com/Veriff)
-- **Base URL:** `https://github.com/Veriff`
-
-#### Tags
-
-- Web SDK
-- JavaScript
-- Capture
-
-#### Properties
-
-- [Documentation](https://github.com/Veriff)
-- [Postman Collection](collections/veriff.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/veriff.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Veriff iOS SDK
-
-Native iOS SDK that drives capture and streams media to Veriff. Initialised with a session URL.
-
-- **Human URL:** [https://github.com/Veriff/veriff-ios](https://github.com/Veriff/veriff-ios)
-- **Base URL:** `https://github.com/Veriff/veriff-ios`
-
-#### Tags
-
-- iOS SDK
-- Mobile
-- Capture
-
-#### Properties
-
-- [Documentation](https://github.com/Veriff/veriff-ios)
-- [Postman Collection](collections/veriff.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/veriff.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Veriff Android SDK
-
-Native Android SDK for capture and media upload. Initialised with a session URL from the Sessions API.
-
-- **Human URL:** [https://github.com/Veriff/veriff-android](https://github.com/Veriff/veriff-android)
-- **Base URL:** `https://github.com/Veriff/veriff-android`
-
-#### Tags
-
-- Android SDK
-- Mobile
-- Capture
-
-#### Properties
-
-- [Documentation](https://github.com/Veriff/veriff-android)
-- [Postman Collection](collections/veriff.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/veriff.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [LinkedIn](https://www.linkedin.com/company/veriff)
 - [Website](https://www.veriff.com/)
 - [Documentation](https://devdocs.veriff.com/)
-- [Git Hub](https://github.com/Veriff)
-- [Plans](plans/veriff-plans-pricing.yml)
-- [Rate Limits](rate-limits/veriff-rate-limits.yml)
-- [Fin Ops](finops/veriff-finops.yml)
+- [Blog](https://www.veriff.com/press)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 25.1** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 71.4 |
+| Contract quality | 42.9 |
+| Contract governance | 0.0 |
+| Operational transparency | 13.2 |
+| Developer ergonomics | 23.8 |
+| Access clarity | 7.9 |
+
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 17.0** — AI & Biometrics
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/veriff/](https://apis.io/providers/veriff/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Veriff: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/veriff/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
